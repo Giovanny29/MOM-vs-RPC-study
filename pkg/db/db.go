@@ -17,7 +17,7 @@ func Init(dbPath string) *gorm.DB {
 
 	// Auto-Migrate creates the tables based on our structs
 	// This is "Code First" migration
-	err = db.AutoMigrate(&Region{}, &Store{}, &Product{}, &Sale{})
+	err = db.AutoMigrate(&Region{}, &Store{}, &Customer{}, &Product{}, &Sale{})
 	if err != nil {
 		log.Fatal("Failed to migrate database schema:", err)
 	}

@@ -28,13 +28,22 @@ type Product struct {
 	Price    float64
 }
 
+// Customer - Names of customers to add complexity to the queries
+type Customer struct {
+	gorm.Model
+	FirstName string
+	LastName  string
+}
+
 // Sale -  The massive table we will query
 type Sale struct {
 	gorm.Model
-	Date      time.Time
-	Amount    float64
-	StoreID   uint
-	ProductID uint
-	Store     Store   // Belongs to Store
-	Product   Product // Belongs to Product
+	Date       time.Time
+	Amount     float64
+	StoreID    uint
+	ProductID  uint
+	CustomerID uint
+	Store      Store    // Belongs to Store
+	Product    Product  // Belongs to Product
+	Customer   Customer // Belongs to Customer
 }
