@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option go_package = "simulation/pkg/protocol";
+
+package protocol;
+
+message SalesRequest {
+  string region = 1;
+  string category = 2;
+
+  string start_date = 3;
+  string end_date = 4;
+
+  int64 min_amount = 5;
+  int64 max_amount = 6;
+  string product_keyword = 7;
+  string buyer_keyword = 8;
+
+  optional int32 start_hour = 9;
+  optional int32 end_hour = 10;
+}
+
+
+message SalesResponse {
+  int64 total_sales_count = 1;
+  int64 total_revenue = 2;
+  double average_amount = 3;
+  string region_processed = 4;
+}
+
+service SimulationService {
+  rpc GetSalesMetrics (SalesRequest) returns (SalesResponse);
+}
