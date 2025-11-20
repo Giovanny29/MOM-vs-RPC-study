@@ -21,8 +21,8 @@ func main() {
 	var regions = make([]db.Region, len(regionNames))
 	var products = make([]db.Product, cap(productNames))
 	var customers = make([]db.Customer, 0, len(customerFirstNames)*len(customerLastNames))
-	//var stores []db.Store
-	//var sales []db.Sale
+	var stores = make([]db.Store, cap(storeNames))
+	var sales = make([]db.Sale, 10000)
 
 	populateRegions(&regions)
 	result := database.Create(&regions)
@@ -42,15 +42,15 @@ func main() {
 		panic(result.Error)
 	}
 
-	//populateStores(&stores, &regions)
-	//result = database.Create(&stores)
-	//if result.Error != nil {
-	//	panic(result.Error)
-	//}
-	//
-	//populateSales(&sales, &stores, &products)
-	//result = database.Create(&sales)
-	//if result.Error != nil {
-	//	panic(result.Error)
-	//}
+	populateStores(&stores, &regions)
+	result = database.Create(&stores)
+	if result.Error != nil {
+		panic(result.Error)
+	}
+
+	populateSales(&sales, &stores, &products, &customers)
+	result = database.CreateInBatches(&sales, 100)
+	if result.Error != nil {
+		panic(result.Error)
+	}
 }

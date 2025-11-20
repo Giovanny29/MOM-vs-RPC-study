@@ -40,6 +40,8 @@ var customerLastNames = []string{
 }
 
 // Store attributes
-var storeNames = []string{}
+var storeAdjectives = []string{"Super", "Mega", "Mix", "Fast"}
+var storeBrands = []string{"Mart", "Store", "Shop"}
+var storeNames = make([]string, 0, len(storeAdjectives)*len(storeBrands))
 
 // Sales attributes

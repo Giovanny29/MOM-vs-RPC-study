@@ -39,7 +39,7 @@ type Customer struct {
 type Sale struct {
 	gorm.Model
 	Date       time.Time
-	Amount     float64
+	Amount     uint
 	StoreID    uint
 	ProductID  uint
 	CustomerID uint
